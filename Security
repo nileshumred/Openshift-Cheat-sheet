@@ -1,0 +1,10 @@
+#Create a secret from the CLI 
+oc create secret generic oia-secret --from-literal=username=myuser
+ --from-literal=password=mypassword
+
+# Use secret in deployment env
+oc set env deployment/ --from secret/oia-secret
+
+# You can also mount the Secret on a Volume 
+oc set volumes dc/myapp --add --name=secret-volume --mount-path=/opt/app-root/
+ --secret-name=oia-secret
