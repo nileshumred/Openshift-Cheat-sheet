@@ -1,0 +1,9 @@
+oc new-build --binary --name=mywildfly -l app=mywildfly
+
+oc patch bc/mywildfly -p '{"spec":{"strategy":{"dockerStrategy":{"dockerfilePath":"Dockerfile"}}}}'
+    
+oc start-build mywildfly --from-dir=. --follow
+
+oc new-app --image-stream=mywildfly
+    
+oc expose svc/mywildfly
