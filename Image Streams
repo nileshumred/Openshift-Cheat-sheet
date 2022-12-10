@@ -1,0 +1,8 @@
+#List available IS for openshift project
+oc get is -n openshift
+
+#Import an image from an external registry
+oc import-image --from=registry.access.redhat.com/jboss-amq-6/amq62-openshift -n openshift jboss-amq-62:1.3 --confirm
+
+#List available IS and templates
+oc new-app --list
