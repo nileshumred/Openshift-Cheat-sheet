@@ -1,0 +1,5 @@
+#Make a service idle. When the service is next accessed will automatically boot up the pods again: 
+$ oc idle ruby-ex
+
+#Read a Service IP
+oc get services rook-ceph-mon-a --template='{{.spec.clusterIP}}'
