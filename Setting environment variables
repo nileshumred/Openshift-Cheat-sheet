@@ -1,0 +1,11 @@
+# Update deployment 'registry' with a new environment variable
+oc set env dc/registry STORAGE_DIR=/local
+  
+# List the environment variables defined on a build config 'sample-build'
+oc set env bc/sample-build --list
+  
+# List the environment variables defined on all pods
+oc set env pods --all --list
+      
+# Import environment from a secret
+oc set env --from=secret/mysecret dc/myapp
