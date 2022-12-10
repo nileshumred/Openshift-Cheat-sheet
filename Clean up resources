@@ -1,0 +1,13 @@
+#Delete all resources
+oc delete all --all
+
+#Delete resources for one specific app
+$ oc delete services -l app=ruby-ex
+$ oc delete all -l app=ruby-ex
+
+#CleanUp old docker images on nodes
+#Keeping up to three tag revisions 1, and keeping resources (images, image streams and pods) younger than sixty minutes:
+oc adm prune images --keep-tag-revisions=3 --keep-younger-than=60m
+
+#Pruning every image that exceeds defined limits:
+oc adm prune images --prune-over-size-limit
