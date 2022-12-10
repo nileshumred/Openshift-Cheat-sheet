@@ -1,0 +1,17 @@
+#Get Nodes list
+oc get nodes
+
+#Check on which Node your Pods are running
+oc get pods -o wide
+
+#Schedule an application to run on another Node
+oc patch dc  myapp -p '{"spec":{"template":{"spec":{"nodeSelector":{"kubernetes.io/hostname": "ip-10-0-0-74.acme.compute.internal"}}}}}'
+
+#List all pods which are running on a Node
+oc adm manage-node node1.local --list-pods
+
+#Add a label to a Node
+oc label node node1.local mylabel=myvalue
+
+#Remove a label from a Node
+oc label node node1.local mylabel-
