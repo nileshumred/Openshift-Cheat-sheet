@@ -1,0 +1,21 @@
+#Manual deployment 
+$ oc rollout latest ruby-ex
+
+#Pause automatic deployment rollout
+oc rollout pause dc $DEPLOYMENT
+
+# Resume automatic deployment rollout
+oc rollout resume dc $DEPLOYMENT 
+
+#Define resource requests and limits in DeploymentConfig
+oc set resources deployment nginx --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi
+
+#Define livenessProve and readinessProve in DeploymentConfig
+oc set probe dc/nginx --readiness --get-url=http://:8080/healthz --initial-delay-seconds=10
+oc set probe dc/nginx --liveness --get-url=http://:8080/healthz --initial-delay-seconds=10
+
+#Scale the number of Pods to 2
+oc scale dc/nginx --replicas=2
+
+#Define Horizontal Pod Autoscaler (hpa)
+oc autoscale dc $DC_NAME --max=4 --cpu-percent=10
