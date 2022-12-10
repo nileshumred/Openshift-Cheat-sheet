@@ -1,0 +1,23 @@
+#Manage node state
+oc adm manage node <node> --schedulable=false
+
+#List installed operators
+oc get csv
+
+#Export in a template the IS, BC, DC and SVC
+oc export is,bc,dc,svc --as-template=app.yaml
+
+#Show user in prompt
+function ps1(){
+   export PS1='[\u@\h($(oc whoami -c 2>/dev/null|cut -d/ -f3,1)) \W]\$ '
+}
+
+#backup openshift objects
+
+oc get all --all-namespaces --no-headers=true | awk '{print $1","$2}' | while read obj
+do
+  NS=$(echo $obj | cut -d, -f1)
+  OBJ=$(echo $obj | cut -d, -f2)
+  FILE=$(echo $obj | sed 's/\//-/g;s/,/-/g')
+  echo $NS $OBJ $FILE; oc export -n $NS $OBJ -o yaml > $FILE.yml
+done
