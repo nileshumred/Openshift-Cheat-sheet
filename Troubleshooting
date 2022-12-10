@@ -1,0 +1,26 @@
+#How to inspect all resources in a namespace (produces resources tree in YAML files)
+oc adm inspect ns/mynamespace
+
+#run cluster diagnostics
+oc adm diagnostics
+
+#Collect must-gather
+oc adm must-gather
+
+#Check status of current project     
+oc status
+
+#Get events for a project
+oc get events --sort-by='{.lastTimestamp}'
+
+# get the logs of the myrunning-pod-2-fdthn pod 
+oc logs myrunning-pod-2-fdthn<br />
+
+# follow the logs of the myrunning-pod-2-fdthn pod 
+oc logs -f myrunning-pod-2-fdthn<br />
+
+# tail the logs of the myrunning-pod-2-fdthn pod 
+oc logs myrunning-pod-2-fdthn --tail=50
+
+#Check the integrated Docker registry logs:
+oc logs docker-registry-n-{xxxxx} -n default | less
