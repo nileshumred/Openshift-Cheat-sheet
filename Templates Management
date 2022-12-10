@@ -1,0 +1,5 @@
+# Deploy resources contained in a template
+oc process -f template.yaml | oc create -f -
+
+#List parameters available in a template
+oc process --parameters -f .template.yaml
