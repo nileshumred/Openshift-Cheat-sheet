@@ -1,0 +1,8 @@
+#Create route
+$ oc expose service ruby-ex
+
+# Create Route and expose it through a custom Hostname
+oc expose serviceruby-ex --hostname 
+
+#Read the Route Host attribute
+oc get route my-route -o jsonpath --template="{.spec.host}"
