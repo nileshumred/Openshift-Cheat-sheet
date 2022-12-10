@@ -1,0 +1,8 @@
+# Create WildFli Image Stream
+oc create -f https://raw.githubusercontent.com/wildfly/wildfly-s2i/wf-26.0/imagestreams/wildfly-centos7.json
+
+# Create WildFly app from GitHub Repo
+$ oc new-app wildfly:26.0~https://github.com/fmarchioni/ocpdemos --context-dir=wildfly-basic --name=wildfly-basic
+
+#Expose Service with a Route
+oc expose service wildfly-basic
