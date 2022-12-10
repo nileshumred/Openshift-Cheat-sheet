@@ -1,0 +1,11 @@
+#Manual build from source  
+oc start-build ruby-ex
+
+#Manual build from source and follow logs 
+oc start-build ruby-ex -F
+
+#Stop a build that is in progress 
+oc cancel-build <build_name> 
+
+#Changing the log level of a build: 
+oc set env bc/my-build-name BUILD_LOGLEVEL=[1-5]
