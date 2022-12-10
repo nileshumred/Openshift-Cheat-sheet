@@ -1,0 +1,14 @@
+#login with a user
+oc login  -u <username> -p <password> <URL:6443>
+
+#login as system admin
+oc login -u system:admin
+
+#User Information
+oc whoami 
+
+#View your configuration
+oc config view
+
+#Update the current context to have users login to the desired namespace:
+oc config set-context `oc config current-context` --namespace=<project_name>
