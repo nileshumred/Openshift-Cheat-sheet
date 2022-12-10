@@ -1,0 +1,44 @@
+#Create a new app from a GutHub Repository
+oc new-app https://github.com/sclorg/cakephp-ex
+
+#New app from a different branch
+oc new-app --name=html-dev nginx:1.10~https://github.com/joe-speedboat/openshift.html.devops.git#mybranch
+
+#Create objects from a file:
+oc create -f myobject.yaml -n myproject
+
+#Delete objects contained in a file:
+oc delete -f myobject.yaml -n myproject
+
+#Create or merge objects from file
+oc apply -f myobject.yaml -n myproject
+
+#Update existing object
+oc patch svc mysvc --type merge --patch '{"spec":{"ports":[{"port": 8080, "targetPort": 5000 }]}}'
+
+#Monitor Pod status
+watch oc get pods
+
+#Get a Specific Item (podIP) using a Go template
+oc get pod example-pod-2 --template='{{.status.podIP}}'
+
+#Gather information on a project's pod deployment with node information
+oc get pods -o wide
+
+#Hide inactive Pods
+oc get pods --show-all=false
+
+#Display all resources
+oc get all,secret,configmap
+
+#Get the Openshift Console Address
+oc get -n openshift-console route console
+
+#Get the Pod name from the Selector and rsh in it
+POD=$(oc get pods -l app=myapp -o name) oc rsh -n $POD
+
+#Exec single command in pod
+oc exec $POD $COMMAND
+
+#Copy from local folder byteman-4.0.12 in Pod wildfly-basic-1-mrlt5 under the folder /opt/wildfly
+oc cp ./byteman-4.0.12 wildfly-basic-1-mrlt5:/opt/wildfly
