@@ -1,0 +1,5 @@
+#Add WildFly Helm Chart to the Repository
+helm repo add wildfly https://docs.wildfly.org/wildfly-charts/
+
+# Image Streams and Configuration in the file sampleapp.yaml
+helm install sample-app wildfly/wildfly -f sampleapp.yaml
